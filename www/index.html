@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="css/textes.css">
+
+	<title>Starfish</title>
+
+	<script type="text/javascript" src="build/iscroll.js"></script>
+	<script src="js/jquery-1.12.1.js" charset="utf-8"></script>
+
+	<!-- //jquery mobile -->
+	<script src="jquery.mobile-1.4.5/jquery.mobile-1.4.5.js" charset="utf-8"></script>
+	<script src="jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js" charset="utf-8"></script>
+
+	<style>
+	.author {
+		font-style: italic;
+		font-weight: bold;
+	}
+	</style>
+
+	<!-- // Lier textes -->
+
+
+	<script type="text/javascript">
+
+	// Pas touche, c'etais dans le fichier de base d'IScroll ////////////////
+	var myScroll;
+	function loaded () {
+		//Comportement de la var text
+		myScroll = new IScroll('#wrapper', {
+			mouseWheel: true,
+			indicators: [{
+				el: document.getElementById('starfield1'),
+				resize: false,
+				ignoreBoundaries: true,
+				speedRatioY: 0.4
+			}, {
+				el: document.getElementById('starfield2'),
+				resize: false,
+				ignoreBoundaries: true,
+				speedRatioY: 0.2
+			}]
+		});
+	}
+
+	document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+	// FIN -- Pas touche, c'etait dans le fichier de base ////////////////
+
+
+
+	//Mon code pour faire apparaitre le texte////////////////
+	$(function(){
+		console.log("Jquery fonctionne !");
+
+		// quand je tappe
+		$("#scroller").on("tap",function(e) {
+			// position dans le scroll
+			var offset = $(this).offset();
+			var relativeX = (e.pageX - offset.left);
+			var relativeY = (e.pageY - offset.top);
+
+			console.log("X: " + relativeX + "  Y: " + relativeY);
+			// Réaction quand on pointe une position en hauteur
+			if(relativeY>100){
+				console.log("Tu es à plus de px");
+				$("<p>Test</p>").appendTo('#conteneurTxt1');
+			}
+			else if(relativeY<200){
+				console.log("negatif");
+			}
+		});
+
+
+
+
+
+	});
+	//FIN //Mon code pour faire apparaitre le texte////////////////
+
+
+
+
+
+	</script>
+
+	<style type="text/css">
+	* {
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+	/*Pour eviter la selection du texte par l'utilisateur*/
+	/*html {
+	-ms-touch-action: none;
+	-moz-user-select: -moz-none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+	}*/
+
+	body,ul,li {
+		padding: 0;
+		margin: 0;
+		border: 0;
+	}
+
+	body {
+		font-size: 13px;
+		font-family: arial;
+		/*///////////////////// c'est ICI qu'on gere le scroll de la page*/
+		overflow: hidden; /* this is important to prevent the whole page to bounce */
+		background: #000;
+	}
+
+	/*@font-face {
+	font-family: 'francisco';
+	src: url('txt/Francisco.ttf');
+	}*/
+
+	#wrapper {
+		position: absolute;
+		z-index: 3;
+		width: 100%;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		overflow: hidden;
+		/*background-color: yellow;*/
+	}
+
+	#scroller {
+		position: absolute;
+		z-index: 3;
+		width: 100%;
+		height: 4000px;
+		overflow: hidden;
+		-webkit-tap-highlight-color: rgba(0,0,0,0);
+		-webkit-transform: translateZ(0);
+		-moz-transform: translateZ(0);
+		-ms-transform: translateZ(0);
+		-o-transform: translateZ(0);
+		transform: translateZ(0);
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		-webkit-text-size-adjust: none;
+		-moz-text-size-adjust: none;
+		-ms-text-size-adjust: none;
+		-o-text-size-adjust: none;
+		text-size-adjust: none;
+		background: url(img/galaxies1.png);
+	}
+
+	.starfield {
+		position: absolute;
+		width: 100%;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		overflow: hidden;
+	}
+
+	.starfield div {
+		position: absolute;
+		width: 100%;
+		overflow: hidden;
+		-webkit-transform: translateZ(0);
+		-moz-transform: translateZ(0);
+		-ms-transform: translateZ(0);
+		-o-transform: translateZ(0);
+		transform: translateZ(0);
+	}
+
+	#starfield1 {
+		z-index: 2;
+	}
+
+	#stars1 {
+		z-index: 2;
+		height: 3000px;
+		background: url(img/galaxies2.png);
+	}
+
+	#starfield2 {
+		z-index: 1;
+	}
+
+	#stars2 {
+		z-index: 1;
+		height: 2000px;
+		background: url(img/stars.jpg);
+	}
+
+	.textes{
+		display: flex;
+		/*background-color: yellow;*/
+		z-index: 5;
+		overflow: visible;
+		align-items: center;
+		flex-direction: column;
+		margin: 10px;
+	}
+
+	/*#conteneurTxt2,#conteneurTxt3,#conteneurTxt4,#conteneurTxt5,#conteneurTxt6,#conteneurTxt7,#conteneurTxt8,#conteneurTxt9,#conteneurTxt10,#conteneurTxt11,#conteneurTxt12,#conteneurTxt13{
+	z-index: 5;
+	align-items: flex-end;
+	background-color: red;
+	border-style: solid;
+	border-color: blue;
+	}*/
+
+	#conteneurTxt1{
+		z-index: 4;
+		align-items: flex-end;
+		opacity: 0.3;
+		transition: opacity 0.3s ease-in;
+	}
+
+	#conteneurTxt1:hover{
+		z-index: 5;
+		opacity: 1;
+		/*transform: translateY(100px);*/
+	}
+
+
+	p{
+		font-family:arial, sans-serif;
+		z-index: 5;
+		font-size: 20px;
+		color: white;
+		letter-spacing: 1px;
+		max-width: 300px;
+		text-align: center;
+	}
+
+
+	</style>
+</head>
+
+<body onload="loaded()">
+
+	<div id="wrapper">
+		<div id="scroller"></div>
+	</div>
+
+	<div class="starfield" id="starfield1">
+		<div id="stars1"></div>
+	</div>
+
+	<div class="starfield" id="starfield2">
+		<div id="stars2"></div>
+	</div>
+
+	<!-- TEMPORAIRE Mes tests sur la police	 -->
+	<div data-editable data-name="testContentTools">
+		<div class="textes">
+			<div id="conteneurTxt1">
+				<p> Il était une fois dans la galaxie, une étoile qui brillait de 1000 feux.</p>
+			</div>
+			<div id="conteneurTxt2">
+				<p> Au fil des jours, des mois, des années, des siècles, l'étoile perdait son intensité. Dans la voie lactée, elle n'avait plus le même éclat.</p>
+			</div>
+			<div id="conteneurTxt3">
+				<p>Un jour, elle s'arrêta complètement de scintiller et tomba dans l’océan. PLOUF</p>
+			</div>
+			<div id="conteneurTxt4">
+				<p>Elle se noya dans la tristesse et elle se sentait bien seule car elle n'était plus dans son élément.</p>
+			</div>
+			<div id="conteneurTxt5">
+				<p>Elle voulut se faire des amis et croisa une étoile de mer à qui elle demanda si elle venait du ciel. Mais en vain !</p>
+			</div>
+			<div id="conteneurTxt6">
+				<p>Elle demanda au poisson lune s'il venait aussi du ciel mais que nenni !</p>
+			</div>
+			<div id="conteneurTxt7">
+				<p>Elle demanda au poisson lune s'il venait aussi du ciel mais que nenni !</p>
+			</div>
+			<div id="conteneurTxt8">
+				<p>Un jour, elle regrettait si fort sa voie lactée qu'elle voulut rejoindre le ciel. Elle tomba au plus bas des tréfonds de l'océan : les abysses.</p>
+			</div>
+			<div id="conteneurTxt9">
+				<p>C'était un endroit obscure, où pas une plante ni un poisson ne vivait. Pas même les hommes qui pourtant avaient exploré l'espace, n'avaient mis les pieds.
+				</p>
+			</div>
+			<div id="conteneurTxt10">
+				<p>Ce milieu hostile ressemblait aux ténèbres, il y faisait noir comme un silence à vous glacer le sang et à vous faire froid dans le dos.
+				</p>
+			</div>
+			<div id="conteneurTxt11">
+				<p>Quand un jour, elle rencontra des créatures étranges, des monstres marins dont on avait oublié l'existence.
+				</p>
+			</div>
+			<div id="conteneurTxt12">
+				<p>D'apparence effrayantes, on les avaient caché aux yeux du monde pour ne pas faire peur. Alors qu'elles étaient d'une extrême bonté.
+				</p>
+			</div>
+			<div id="conteneurTxt13">
+				<p>La petite étoile s'en fit des amis ainsi qu'une grande famille.
+				</p>
+			</div>
+			<div id="conteneurTxt14">
+				<p>À partir de ce jour, la petite étoile rayonna dans les abysses.
+				</p>
+			</div>
+		</div>
+	</div>
+	<!-- FIN des textes -->
+
+
+
+	<!-- TODO: Splashscreen(a mettre dans le onload?) -->
+
+
+	<!-- //TODO - sur le texte :
+	-faire apparaitre le texte qu scroller
+	-pouvoir faire defiller le fond meme s'il y a du texte
+	-animer le txt avec jquery
+-->
+<script src="build/content-tools.min.js"></script>
+<script src="build/editor.js"></script>
+</body>
+
+
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="contentTools/content-tools.min.css">
+
+	<title>Starfish</title>
+
+	<script type="text/javascript" src="build/iscroll.js"></script>
+	<script src="js/jquery-1.12.1.js" charset="utf-8"></script>
+
+
+	<!-- // Lier textes -->
+
+
+	<script type="text/javascript">
+
+	// Pas touche, c'etais dans le fichier de base d'IScroll ////////////////
+	var myScroll;
+	function loaded () {
+		//Comportement de la var text
+		myScroll = new IScroll('#wrapper', {
+			mouseWheel: true,
+			indicators: [{
+				el: document.getElementById('starfield1'),
+				resize: false,
+				ignoreBoundaries: true,
+				speedRatioY: 0.4
+			}, {
+				el: document.getElementById('starfield2'),
+				resize: false,
+				ignoreBoundaries: true,
+				speedRatioY: 0.2
+			}]
+		});
+	}
+
+	document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+	// FIN -- Pas touche, c'etais dans le fichier de base ////////////////
+
+
+	$(function(){
+		console.log("Jquery fonctionne !");
+		//Quand on scroll
+		$(window).scroll(
+			function(){ //Au scroll dans la fenetre on déclenche la fonction
+				if ($(this).scroller()= 200) {
+					console.log("ca marche ! ");
+					$("p").scrollY();
+				}
+				else {
+					console.log("echec");
+				}
+			}
+		)
+
+	});
+
+
+
+
+
+
+	</script>
+
+	<style type="text/css">
+	* {
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+	/*Pour eviter la selection du texte par l'utilisateur*/
+	/*html {
+	-ms-touch-action: none;
+	-moz-user-select: -moz-none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+	}*/
+
+	body,ul,li {
+		padding: 0;
+		margin: 0;
+		border: 0;
+	}
+
+	body {
+		font-size: 13px;
+		font-family: Arial;
+		overflow: hidden; /* this is important to prevent the whole page to bounce */
+		background: #000;
+	}
+
+	/*@font-face {
+		font-family: 'francisco';
+		src: url('txt/Francisco.ttf');
+	}*/
+
+	#wrapper {
+		position: absolute;
+		z-index: 3;
+		width: 100%;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		overflow: hidden;
+	}
+
+	#scroller {
+		position: absolute;
+		z-index: 3;
+		width: 100%;
+		height: 4000px;
+		overflow: hidden;
+		-webkit-tap-highlight-color: rgba(0,0,0,0);
+		-webkit-transform: translateZ(0);
+		-moz-transform: translateZ(0);
+		-ms-transform: translateZ(0);
+		-o-transform: translateZ(0);
+		transform: translateZ(0);
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		-webkit-text-size-adjust: none;
+		-moz-text-size-adjust: none;
+		-ms-text-size-adjust: none;
+		-o-text-size-adjust: none;
+		text-size-adjust: none;
+		background: url(img/galaxies1.png);
+	}
+
+	.starfield {
+		position: absolute;
+		width: 100%;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		overflow: hidden;
+	}
+
+	.starfield div {
+		position: absolute;
+		width: 100%;
+		overflow: hidden;
+		-webkit-transform: translateZ(0);
+		-moz-transform: translateZ(0);
+		-ms-transform: translateZ(0);
+		-o-transform: translateZ(0);
+		transform: translateZ(0);
+	}
+
+	#starfield1 {
+		z-index: 2;
+	}
+
+	#stars1 {
+		z-index: 2;
+		height: 3000px;
+		background: url(img/galaxies2.png);
+	}
+
+	#starfield2 {
+		z-index: 1;
+	}
+
+	#stars2 {
+		z-index: 1;
+		height: 2000px;
+		background: url(img/stars.jpg);
+	}
+
+	.textes{
+		display: flex;
+		/*position: absolute;*/
+		/*background-color: yellow;*/
+		z-index: 5;
+		overflow: visible;
+		/*align-items: flex-end;*/
+		justify-content: center;
+		margin: 10px;
+
+	}
+
+	#conteneurTxt1{
+		z-index: 5;
+		align-items: flex-end;
+		/*background-color: red;*/
+		overflow: visible;
+	}
+
+
+	p{
+		font-family: Arial, sans-serif;
+		z-index: 5;
+		font-size: 20px;
+		color: white;
+		letter-spacing: 1px;
+		max-width: 300px;
+		text-align: center;
+	}
+
+
+	//Test content tools
+	// Alignment styles for images, videos and iframes in editable regions
+
+	// Center (default)
+	[data-editable] image,
+	[data-editable] [data-ce-tag=img],
+	[data-editable] img,
+	[data-editable] video {
+	clear: both;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 100%;
+}
+
+// Left align
+[data-editable] image.align-left,
+[data-editable] [data-ce-tag=img].align-left,
+[data-editable] img.align-left,
+[data-editable] video.align-left {
+clear: initial;
+float: left;
+margin-right: 0.5em;
+}
+
+// Right align
+[data-editable] image.align-right,
+[data-editable] [data-ce-tag=img].align-right,
+[data-editable] img.align-right,
+[data-editable] video.align-right {
+clear: initial;
+float: right;
+margin-left: 0.5em;
+}
+
+// Alignment styles for text in editable regions
+[data-editable] .text-center {
+text-align: center;
+}
+
+[data-editable] .text-left {
+text-align: left;
+}
+
+[data-editable] .text-right {
+text-align: right;
+}
+
+
+</style>
+
+<style>
+        .author {
+            font-style: italic;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body onload="loaded()">
+
+	<div id="wrapper">
+		<div id="scroller"></div>
+	</div>
+
+	<div class="starfield" id="starfield1">
+		<div id="stars1"></div>
+	</div>
+
+	<div class="starfield" id="starfield2">
+		<div id="stars2"></div>
+	</div>
+
+	<!-- TEMPORAIRE Mes tests sur la police	 -->
+	<div data-editable data-name="testContentTools">
+		<div class="textes">
+			<div id="conteneurTxt1">
+				<p> Il était une fois dans la galaxie, une étoile qui brillait de 1000 feux.</p>
+			</div>
+		</div>
+	</div>
+	<!-- FIN des textes -->
+
+
+
+	<!-- TODO: Splashscreen(a mettre dans le onload?) -->
+
+
+	<!-- //TODO - sur le texte :
+	-faire apparaitre le texte qu scroller
+	-pouvoir faire defiller le fond meme s'il y a du texte
+	-animer le txt avec jquery
+-->
+<script src="contentTools/content-tools.min.js"></script>
+<script src="contentTools/editor.js"></script>
+</body>
+
+
+</html>
